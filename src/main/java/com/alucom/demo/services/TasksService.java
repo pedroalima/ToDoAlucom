@@ -2,11 +2,11 @@ package com.alucom.demo.services;
 
 import com.alucom.demo.entities.Tasks;
 import com.alucom.demo.repositories.TasksRepository;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TasksService {
@@ -30,8 +30,15 @@ public class TasksService {
         return this.list();
     }
 
-    public List<Tasks> update(Tasks task) {
-        _tasksRepository.save(task);
+    public List<Tasks> update(Long id, Tasks task) {
+        Tasks updateTask = _tasksRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
+
+        updateTask.setTitle(task.getTitle());
+        updateTask.setDescription(task.getDescription());
+        updateTask.setCompleted(task.isCompleted());
+        updateTask.setPriority(task.getPriority());
+        _tasksRepository.save(updateTask);
 
         return this.list();
     }
