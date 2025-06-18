@@ -5,9 +5,8 @@ Este é um projeto de demonstração desenvolvido com Spring Boot, que implement
 ## Requisitos
 
 - Java 17 ou superior
-- Maven
-- PostgreSQL
-- Docker e Docker Compose
+- Git
+- Docker
 
 ## Rodando Projeto
 
@@ -23,7 +22,7 @@ Para executar localmente, siga os passos abaixo:
 git clone https://github.com/pedroalima/ToDoAlucomAPI.git
 ```
 
-Entre na raiz do projeto
+2. Entre na raiz do projeto
 
 ```bash
 cd ToDoAlucomAPI
@@ -31,7 +30,7 @@ cd ToDoAlucomAPI
 
 ### Usando Docker
 
-Ainda no terminal, na raiz do projeto, construa a imagem Docker:
+3. Ainda no terminal, na raiz do projeto, construa a imagem Docker:
 
 ```bash
 docker build -t pedroalima/alucom-api .
@@ -39,7 +38,7 @@ docker build -t pedroalima/alucom-api .
 
 ### Usando Docker Compose
 
-Execute a aplicação usando Docker Compose:
+4. Execute a aplicação usando Docker Compose:
 
 ```bash
 docker-compose up -d
@@ -61,7 +60,6 @@ Este comando irá:
 - Maven
 - Docker
 - Docker Compose
-- Vercel
 - Render
 
 ## Endpoints da API
@@ -80,10 +78,10 @@ A API fornece os seguintes endpoints para gerenciamento de tarefas:
 - Corpo da requisição:
   ```json
   {
-    "title": "string",       // obrigatório
-    "description": "string", // opcional
-    "completed": boolean,    // opcional
-    "priority": integer     // opcional
+    "title": "string",    // obrigatório
+    "description": "string",
+    "completed": boolean,
+    "priority": int
   }
   ```
 - Resposta: Lista atualizada de tarefas
