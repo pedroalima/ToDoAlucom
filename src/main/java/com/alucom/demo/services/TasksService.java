@@ -16,14 +16,20 @@ public class TasksService {
     }
 
     public List<Tasks> list() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "priority").and(
-            Sort.by(Sort.Direction.ASC, "title")
-        );
+        // Cria um objeto de ordenação (Sort)
+        // Primeiro, ordena pela prioridade de forma decrescente (maior prioridade primeiro)
+        Sort sort = Sort.by(Sort.Direction.DESC, "priority")
+                // Depois, em caso de prioridades iguais, ordena por título em ordem crescente (A-Z)
+                .and(Sort.by(Sort.Direction.ASC, "title"));
 
         return _tasksRepository.findAll(sort);
     }
 
     public List<Tasks> create(Tasks task) {
+        if (task.getTitle() == null || task.getTitle().isBlank()) {
+            throw new IllegalArgumentException("O campo 'title' é obrigatório.");
+        }
+
         _tasksRepository.save(task);
 
         return this.list();
